@@ -16,6 +16,7 @@ const Wrapper = styled.div`
   top: 0;
   left: 0;
   width: 100%;
+  padding 24px 0 0 0;
   max-width: 410px;
   height: 100%;
   max-height: 100%;
@@ -34,8 +35,8 @@ const Wrapper = styled.div`
 
 const Weight = styled.div`
   padding: 0 24px;
-  font-size: 140px;
-  line-height: 140px;
+  font-size: 120px;
+  line-height: 120px;
   font-weight: 700;
   letter-spacing: -0.02em;
   position: sticky;
@@ -50,17 +51,18 @@ const Measure = styled.span`
 `;
 
 const Plate = styled.div`
-  width: ${(props) => props.size}px;
-  height: ${(props) => props.size}px;
   flex: 0 0 ${(props) => props.size}px;
   display: flex;
-  border-radius: 40000px;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
+  flex-direction: column;
+  font-size: 10px;
+  color: #929292;
   img {
-    width: 100%;
+    width: ${(props) => props.size}px;
+    height: ${(props) => props.size}px;
     padding: 0;
-    margin: 0;
+    margin: 0 0 8px 0;
   }
 `;
 
@@ -84,6 +86,12 @@ const BottomContain = styled.div`
   bottom: 0px;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(
+    360deg,
+    rgb(11, 11, 11) 0%,
+    rgba(20, 20, 20, 0) 100%,
+    rgba(11, 11, 11, 0) 100%
+  );
 `;
 
 const Bottom = styled.div`
@@ -96,16 +104,16 @@ const Plates = styled.div`
   display: flex;
   overflow-x: scroll;
   overflow-y: hidden;
-  align-items: center;
-  padding: 0 24px;
-  height: auto;
+  align-items: end;
+  gap: 16px;
+  padding: 0 24px 16px 24px;
 `;
 
 const ActionsWrap = styled.div`
   width: 100%;
   display: flex;
-  justify-content: center;
-  padding: 8px;
+  justify-content: end;
+  padding: 8px 16px;
 `;
 
 const QuickActions = styled.div`
@@ -141,6 +149,7 @@ const Barbell = styled.div`
   display: flex;
   align-items: end;
   align-items: center;
+  transform: rotate(180deg);
 `;
 
 const BarbellRight = styled.div`
@@ -161,6 +170,11 @@ const BarbellLeft = styled.div`
   flex-direction: row-reverse;
   align-items: center;
   justify-content: end;
+`;
+
+const BarbellWrap = styled.div`
+  transform-origin: left center;
+  transform: scale(0.9);
 `;
 
 class App extends Component {
@@ -241,7 +255,7 @@ class App extends Component {
           {this.state.weight + this.state.bar}
           <Measure>lb</Measure>
         </Weight>
-        <div>
+        <BarbellWrap>
           <Barbell>
             <BarbellLeft>
               {this.state.weights &&
@@ -398,62 +412,8 @@ class App extends Component {
             </BarbellLeft>
             <BarbellRight />
           </Barbell>
-        </div>
+        </BarbellWrap>
         <BottomContain>
-          <Bottom>
-            <Plates>
-              <Plate
-                bg="green"
-                size="107"
-                onClick={() => this.updateWeight("+", 2.5)}
-              >
-                <img src={Plate2Half} />
-              </Plate>
-              <Plate
-                bg="blue"
-                size="117"
-                onClick={() => this.updateWeight("+", 5)}
-              >
-                <img src={Plate5} />
-              </Plate>
-              <Plate
-                bg="gray"
-                size="159"
-                onClick={() => this.updateWeight("+", 10)}
-              >
-                <img src={Plate10} />
-              </Plate>
-              <Plate
-                bg="green"
-                size="159"
-                onClick={() => this.updateWeight("+", 25)}
-              >
-                <img src={Plate25} />
-              </Plate>
-              <Plate
-                bg="yellow"
-                size="159"
-                onClick={() => this.updateWeight("+", 35)}
-              >
-                <img src={Plate35} />
-              </Plate>
-              <Plate
-                bg="blue"
-                size="159"
-                onClick={() => this.updateWeight("+", 45)}
-              >
-                <img src={Plate45} />
-              </Plate>
-              <Plate
-                bg="red"
-                size="159"
-                onClick={() => this.updateWeight("+", 55)}
-              >
-                <img src={Plate55} />
-              </Plate>
-            </Plates>
-            <Skrim />
-          </Bottom>
           <ActionsWrap>
             <QuickActions>
               <Clear onClick={this.clear}>
@@ -502,6 +462,67 @@ class App extends Component {
               </Undo>
             </QuickActions>
           </ActionsWrap>
+          <Bottom>
+            <Plates>
+              <Plate
+                bg="green"
+                size="80"
+                onClick={() => this.updateWeight("+", 2.5)}
+              >
+                <img src={Plate2Half} />
+                {this.state.weight + this.state.bar + 5}lbs
+              </Plate>
+              <Plate
+                bg="blue"
+                size="96"
+                onClick={() => this.updateWeight("+", 5)}
+              >
+                <img src={Plate5} />
+                {this.state.weight + this.state.bar + 10}lbs
+              </Plate>
+              <Plate
+                bg="gray"
+                size="128"
+                onClick={() => this.updateWeight("+", 10)}
+              >
+                <img src={Plate10} />
+                {this.state.weight + this.state.bar + 20}lbs
+              </Plate>
+              <Plate
+                bg="green"
+                size="128"
+                onClick={() => this.updateWeight("+", 25)}
+              >
+                <img src={Plate25} />
+                {this.state.weight + this.state.bar + 50}lbs
+              </Plate>
+              <Plate
+                bg="yellow"
+                size="128"
+                onClick={() => this.updateWeight("+", 35)}
+              >
+                <img src={Plate35} />
+                {this.state.weight + this.state.bar + 70}lbs
+              </Plate>
+              <Plate
+                bg="blue"
+                size="128"
+                onClick={() => this.updateWeight("+", 45)}
+              >
+                <img src={Plate45} />
+                {this.state.weight + this.state.bar + 90}lbs
+              </Plate>
+              <Plate
+                bg="red"
+                size="128"
+                onClick={() => this.updateWeight("+", 55)}
+              >
+                <img src={Plate55} />
+                {this.state.weight + this.state.bar + 110}lbs
+              </Plate>
+            </Plates>
+            <Skrim />
+          </Bottom>
         </BottomContain>
       </Wrapper>
     );
