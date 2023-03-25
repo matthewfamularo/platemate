@@ -371,7 +371,7 @@ class App extends Component {
             </>
           }
         >
-          <Tabs>
+          <Tabs forceRenderTabPanel>
             <TabList>
               <Tab>Plates</Tab>
               <Tab>Bars</Tab>
