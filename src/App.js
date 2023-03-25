@@ -289,25 +289,29 @@ class App extends Component {
           scrollLocking={false}
           ref={this.sheetRef}
           onSpringStart={(event) => {
+            let start = this.sheetRef.current.height;
             let end;
             if (event.type == "SNAP") {
               requestAnimationFrame(() => {
                 end = this.sheetRef.current.height;
-                if (end <= initialHeight) {
-                  this.setState({
-                    open: false,
-                  });
-                } else {
-                  this.setState({
-                    open: true,
-                  });
+                if (start !== end) {
+                  if (end < initialHeight) {
+                    this.setState({
+                      open: false,
+                    });
+                  } else {
+                    this.setState({
+                      open: true,
+                    });
+                  }
                 }
               });
             }
           }}
           onSpringEnd={(event) => {
-            if (event.type === "OPEN") {
+            if (event.type == "OPEN") {
               initialHeight = this.sheetRef.current.height;
+              console.log("initial: " + initialHeight);
             }
           }}
           header={
