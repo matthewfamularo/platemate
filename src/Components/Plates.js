@@ -95,7 +95,7 @@ class Plates extends Component {
 
   render() {
     return (
-      <Wrapper lock={this.props.open && this.props.lock}>
+      <Wrapper id="plates" lock={this.props.open && this.props.lock}>
         <Plate
           onClick={() => !this.props.open && this.props.updateWeight("+", 2.5)}
         >

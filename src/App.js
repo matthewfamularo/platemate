@@ -256,6 +256,7 @@ class App extends Component {
   }
 
   changePlates(plates) {
+    document.getElementById("plates").scrollTo(0, 0);
     this.setState({
       plates: plates,
     });
@@ -361,12 +362,7 @@ class App extends Component {
                 </ActionsWrap>
               )}
               <Bottom id="bottom">
-                <Plates
-                  lock
-                  updateWeight={this.updateWeight}
-                  {...this.state}
-                  id="plates"
-                />
+                <Plates lock updateWeight={this.updateWeight} {...this.state} />
               </Bottom>
             </>
           }
