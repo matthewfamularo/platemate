@@ -7,32 +7,12 @@ import Bar15 from "./assets/barbell-15.png";
 import Bar20 from "./assets/barbell-20.png";
 import Bar25 from "./assets/barbell-25.png";
 import BarbellCollarImg from "./assets/barbell-collar.png";
-import BarbellSleeveImg from "./assets/barbell-sleeve-20.png";
-import BarbellSleeve15Img from "./assets/barbell-sleeve-15.png";
-import BarbellSleeve25Img from "./assets/barbell-sleeve-25.png";
 import Check from "./assets/check.png";
 import "react-spring-bottom-sheet/dist/style.css";
-import Plate2Half from "./assets/plate-2.5.png";
-import Plate5 from "./assets/plate-5.png";
-import Plate10 from "./assets/plate-10.png";
-import Plate25 from "./assets/plate-25.png";
-import Plate35 from "./assets/plate-35.png";
-import Plate45 from "./assets/plate-45.png";
-import Plate55 from "./assets/plate-55.png";
 import styled from "styled-components";
 
-const handleBarbellSleeve = (weight) => {
-  switch (weight) {
-    case 25:
-    case 55:
-      return BarbellSleeve25Img;
-    case 15:
-    case 33:
-      return BarbellSleeve15Img;
-    default:
-      return BarbellSleeveImg;
-  }
-};
+import Plates from "./Components/Plates";
+import BarbellSleeve from "./Components/BarbellSleeve";
 
 const Wrapper = styled.div`
 max-width: 480px !important;
@@ -72,32 +52,6 @@ const Measure = styled.span`
   letter-spacing: 0;
 `;
 
-const Plate = styled.div`
-  flex: 0 0 ${(props) => props.size}px;
-  display: flex;
-  justify-content: end;
-  align-items: center;
-  flex-direction: column;
-  font-size: 10px;
-  color: #929292;
-  img {
-    width: ${(props) => props.size}px;
-    height: ${(props) => props.size}px;
-    padding: 0;
-    margin: 0 0 8px 0;
-  }
-`;
-
-const Skrim = styled.div`
-  position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 24px;
-  height: 168px;
-  pointer-events: none;
-  background: linear-gradient(270deg, #1c1c1c 24.32%, rgba(28, 28, 28, 0) 100%);
-`;
-
 const BottomContain = styled.div`
   position: sticky;
   bottom: 0px;
@@ -113,17 +67,6 @@ const BottomContain = styled.div`
 
 const Bottom = styled.div`
   width: 100%;
-`;
-
-const Plates = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  overflow-x: ${(props) => (props.lock ? "hidden" : "scroll")};
-  overflow-y: hidden;
-  align-items: end;
-  gap: 16px;
-  padding: 16px 24px 16px 24px;
 `;
 
 const ActionsWrap = styled.div`
@@ -168,23 +111,10 @@ const Barbell = styled.div`
 `;
 
 const BarbellCollar = styled.div`
-  width: 61px;
-  height: 64px;
+  width: 90px;
+  height: 80px;
   background: url(${BarbellCollarImg});
   background-size: cover;
-`;
-
-const BarbellSleeve = styled.div`
-  width: 100%;
-  height: ${(props) => props.height || "80px"};
-  background: url(${(props) => handleBarbellSleeve(props.weight)});
-  background-size: 100%;
-  background-position: center right;
-  background-repeat: no-repeat;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: start;
 `;
 
 const BarbellWrap = styled.div`
@@ -201,6 +131,11 @@ const Bar = styled.div`
     width: 100%;
     padding-right: 16px;
   }
+`;
+
+const PlateSet = styled.div`
+  padding: 16px 0;
+  border-bottom: 1px solid #2d2d2d;
 `;
 
 const Radio = styled.div`
@@ -247,13 +182,13 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      weight: null,
       weight: 0,
       bar: 45,
       mode: "lb",
       weights: [],
       weightsSorted: [],
       open: false,
+      plates: "Rogue Bumpers",
     };
     this.updateWeight = this.updateWeight.bind(this);
     this.removeLast = this.removeLast.bind(this);
@@ -320,6 +255,12 @@ class App extends Component {
     });
   }
 
+  changePlates(plates) {
+    this.setState({
+      plates: plates,
+    });
+  }
+
   render() {
     return (
       <Wrapper>
@@ -330,159 +271,7 @@ class App extends Component {
         <BarbellWrap>
           <Barbell height="320px">
             <BarbellCollar />
-            <BarbellSleeve weight={this.state.bar} height="321px">
-              {this.state.weights &&
-                this.state.weights.map(
-                  (item) =>
-                    (item == "2.5" && (
-                      <svg
-                        width="16"
-                        height="97"
-                        viewBox="0 0 16 97"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="16" height="97" rx="8" fill="#44C030" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="14"
-                          height="95"
-                          rx="7"
-                          stroke="#0D0D0D"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    )) ||
-                    (item == "5" && (
-                      <svg
-                        width="16"
-                        height="145"
-                        viewBox="0 0 16 145"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="16" height="145" rx="8" fill="#4B63E3" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="14"
-                          height="143"
-                          rx="7"
-                          stroke="#0D0D0D"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    )) ||
-                    (item == "10" && (
-                      <svg
-                        width="16"
-                        height="321"
-                        viewBox="0 0 16 321"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="16" height="321" rx="8" fill="#373739" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="14"
-                          height="319"
-                          rx="7"
-                          stroke="#505050"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    )) ||
-                    (item == "25" && (
-                      <svg
-                        width="32"
-                        height="321"
-                        viewBox="0 0 32 321"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="32" height="321" rx="10" fill="#44C030" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="30"
-                          height="319"
-                          rx="9"
-                          stroke="#0D0D0D"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    )) ||
-                    (item == "35" && (
-                      <svg
-                        width="40"
-                        height="321"
-                        viewBox="0 0 40 321"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="40" height="321" rx="10" fill="#BFC21E" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="38"
-                          height="319"
-                          rx="9"
-                          stroke="#0D0D0D"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    )) ||
-                    (item == "45" && (
-                      <svg
-                        width="48"
-                        height="321"
-                        viewBox="0 0 48 321"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="48" height="321" rx="10" fill="#4B63E3" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="46"
-                          height="319"
-                          rx="9"
-                          stroke="#0D0D0D"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    )) ||
-                    (item == "55" && (
-                      <svg
-                        width="56"
-                        height="321"
-                        viewBox="0 0 56 321"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect width="56" height="321" rx="10" fill="#DA4F22" />
-                        <rect
-                          x="1"
-                          y="1"
-                          width="54"
-                          height="319"
-                          rx="9"
-                          stroke="#0D0D0D"
-                          stroke-opacity="0.5"
-                          stroke-width="2"
-                        />
-                      </svg>
-                    ))
-                )}
-            </BarbellSleeve>
+            <BarbellSleeve {...this.state} />
           </Barbell>
         </BarbellWrap>
         <BottomSheet
@@ -573,105 +362,38 @@ class App extends Component {
                 </ActionsWrap>
               )}
               <Bottom id="bottom">
-                <Plates lock={this.state.open} id="plates">
-                  <Plate
-                    bg="green"
-                    size="80"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 2.5)
-                    }
-                  >
-                    <img src={Plate2Half} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 5}lbs`}
-                  </Plate>
-                  <Plate
-                    bg="blue"
-                    size="96"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 5)
-                    }
-                  >
-                    <img src={Plate5} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 10}lbs`}
-                  </Plate>
-                  <Plate
-                    bg="gray"
-                    size="128"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 10)
-                    }
-                  >
-                    <img src={Plate10} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 20}lbs`}
-                  </Plate>
-                  <Plate
-                    bg="green"
-                    size="128"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 25)
-                    }
-                  >
-                    <img src={Plate25} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 50}lbs`}
-                  </Plate>
-                  <Plate
-                    bg="yellow"
-                    size="128"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 35)
-                    }
-                  >
-                    <img src={Plate35} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 70}lbs`}
-                  </Plate>
-                  <Plate
-                    bg="blue"
-                    size="128"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 45)
-                    }
-                  >
-                    <img src={Plate45} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 90}lbs`}
-                  </Plate>
-                  <Plate
-                    bg="red"
-                    size="128"
-                    onClick={() =>
-                      !this.state.open && this.updateWeight("+", 55)
-                    }
-                  >
-                    <img src={Plate55} />
-                    {this.state.open
-                      ? " "
-                      : `${this.state.weight + this.state.bar + 110}lbs`}
-                  </Plate>
-                </Plates>
+                <Plates
+                  lock
+                  updateWeight={this.updateWeight}
+                  {...this.state}
+                  id="plates"
+                />
               </Bottom>
             </>
           }
         >
           <Tabs>
             <TabList>
-              {/* <Tab>Plates</Tab> */}
+              <Tab>Plates</Tab>
               <Tab>Bars</Tab>
             </TabList>
 
-            {/* <TabPanel>
-              <h2>Plates</h2>
-            </TabPanel> */}
+            <TabPanel>
+              <PlateSet onClick={() => this.changePlates("Rogue Bumpers")}>
+                <ItemInfo>
+                  <Label>Rogue Colored Plates</Label>
+                  <Radio checked={this.state.plates == "Rogue Bumpers"} />
+                </ItemInfo>
+                <Plates plates="Rogue Bumpers" open={this.state.open} />
+              </PlateSet>
+              <PlateSet onClick={() => this.changePlates("Urethane")}>
+                <ItemInfo>
+                  <Label>Generic Urethane Plates</Label>
+                  <Radio checked={this.state.plates == "Urethane"} />
+                </ItemInfo>
+                <Plates plates="Urethane" open={this.state.open} />
+              </PlateSet>
+            </TabPanel>
             <TabPanel>
               <Bars>
                 <Bar weight={15} onClick={() => this.changeBar(33)}>
