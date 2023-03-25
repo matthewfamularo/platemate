@@ -3,6 +3,9 @@ import { BottomSheet } from "react-spring-bottom-sheet";
 import FocusTrap from "focus-trap-react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import logo from "./logo.svg";
+import Bar15 from "./assets/barbell-15.png";
+import Bar20 from "./assets/barbell-20.png";
+import Bar25 from "./assets/barbell-25.png";
 import BarbellCollarImg from "./assets/barbell-collar.png";
 import BarbellSleeveImg from "./assets/barbell-sleeve-20.png";
 import BarbellSleeve15Img from "./assets/barbell-sleeve-15.png";
@@ -191,7 +194,14 @@ const BarbellWrap = styled.div`
 
 const Bars = styled.div``;
 
-const Bar = styled.div``;
+const Bar = styled.div`
+  padding: 16px 0;
+  border-bottom: 1px solid #2d2d2d;
+  img {
+    width: 100%;
+    padding-right: 16px;
+  }
+`;
 
 const Radio = styled.div`
   width: 24px;
@@ -213,6 +223,20 @@ const Radio = styled.div`
     top: -2px;
     left: -2px;
   }
+`;
+
+const ItemInfo = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px 8px 16px;
+`;
+
+const Label = styled.div`
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 500;
+  color: white;
 `;
 
 let sheetRef;
@@ -641,36 +665,35 @@ class App extends Component {
         >
           <Tabs>
             <TabList>
-              <Tab>Plates</Tab>
+              {/* <Tab>Plates</Tab> */}
               <Tab>Bars</Tab>
             </TabList>
 
-            <TabPanel>
+            {/* <TabPanel>
               <h2>Plates</h2>
-            </TabPanel>
+            </TabPanel> */}
             <TabPanel>
-              <h2>Bars</h2>
               <Bars>
-                <Bar weight={15}>
-                  <Radio checked={this.state.bar == 33} value={15} />
-                  <Barbell onClick={() => this.changeBar(33)}>
-                    <BarbellCollar />
-                    <BarbellSleeve weight={15} />
-                  </Barbell>
+                <Bar weight={15} onClick={() => this.changeBar(33)}>
+                  <ItemInfo>
+                    <Label>15kg</Label>
+                    <Radio checked={this.state.bar == 33} value={15} />
+                  </ItemInfo>
+                  <img src={Bar15} />
                 </Bar>
-                <Bar weight={20}>
-                  <Radio checked={this.state.bar == 45} value={20} />
-                  <Barbell onClick={() => this.changeBar(45)}>
-                    <BarbellCollar />
-                    <BarbellSleeve weight={20} />
-                  </Barbell>
+                <Bar weight={20} onClick={() => this.changeBar(45)}>
+                  <ItemInfo>
+                    <Label>20kg</Label>
+                    <Radio checked={this.state.bar == 45} value={20} />
+                  </ItemInfo>
+                  <img src={Bar20} />
                 </Bar>
-                <Bar weight={25}>
-                  <Radio checked={this.state.bar == 55} value={25} />
-                  <Barbell onClick={() => this.changeBar(55)}>
-                    <BarbellCollar />
-                    <BarbellSleeve weight={25} />
-                  </Barbell>
+                <Bar weight={25} onClick={() => this.changeBar(55)}>
+                  <ItemInfo>
+                    <Label>25kg</Label>
+                    <Radio checked={this.state.bar == 55} value={25} />
+                  </ItemInfo>
+                  <img src={Bar25} />
                 </Bar>
               </Bars>
             </TabPanel>
