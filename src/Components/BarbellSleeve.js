@@ -341,23 +341,30 @@ const handlePlates = (plates, weight) => {
     if (plates == "Rogue Bumpers") {
       return (
         <svg
-          width="48"
+          width="56"
           height="321"
-          viewBox="0 0 48 321"
+          viewBox="0 0 56 321"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect width="48" height="321" rx="10" fill="#4B63E3" />
-          <rect
-            x="1"
-            y="1"
-            width="46"
-            height="319"
-            rx="9"
-            stroke="#0D0D0D"
-            stroke-opacity="0.5"
-            stroke-width="2"
-          />
+          <g clip-path="url(#clip0_1_348)">
+            <rect width="56" height="321" rx="10" fill="#DA4F22" />
+            <rect
+              x="1"
+              y="1"
+              width="54"
+              height="319"
+              rx="9"
+              stroke="#0D0D0D"
+              stroke-opacity="0.5"
+              stroke-width="2"
+            />
+          </g>
+          <defs>
+            <clipPath id="clip0_1_348">
+              <rect width="56" height="321" fill="white" />
+            </clipPath>
+          </defs>
         </svg>
       );
     } else if (plates == "Urethane") {
