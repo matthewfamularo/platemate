@@ -295,7 +295,7 @@ class App extends Component {
               requestAnimationFrame(() => {
                 end = this.sheetRef.current.height;
                 if (start !== end) {
-                  if (end < initialHeight) {
+                  if (end < start) {
                     this.setState({
                       open: false,
                     });
@@ -306,12 +306,6 @@ class App extends Component {
                   }
                 }
               });
-            }
-          }}
-          onSpringEnd={(event) => {
-            if (event.type == "OPEN") {
-              initialHeight = this.sheetRef.current.height;
-              console.log("initial: " + initialHeight);
             }
           }}
           header={
