@@ -259,6 +259,7 @@ class App extends Component {
     this.setState({
       plates: plates,
     });
+    this.clear();
   }
 
   render() {
