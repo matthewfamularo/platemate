@@ -89,6 +89,7 @@ const Undo = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: ${(props) => (props.active ? "1" : ".5")};
 `;
 
 const Clear = styled.div`
@@ -98,6 +99,7 @@ const Clear = styled.div`
   justify-content: center;
   align-items: center;
   border-right: 1px solid #2d2d2d;
+  opacity: ${(props) => (props.active ? "1" : ".5")};
 `;
 
 const Barbell = styled.div`
@@ -313,35 +315,26 @@ class App extends Component {
               {!this.state.open && (
                 <ActionsWrap>
                   <QuickActions>
-                    <Clear onClick={this.clear}>
+                    <Clear onClick={this.clear} active={this.state.weight > 0}>
                       <svg
-                        width="20"
-                        height="22"
-                        viewBox="0 0 20 22"
+                        width="40"
+                        height="40"
+                        viewBox="0 0 40 40"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                       >
-                        <g clip-path="url(#clip0_47_1312)">
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M11.3358 0.659759C11.788 0.97689 11.8974 1.60052 11.5803 2.05268L10.4875 3.61079C14.4097 3.59655 18.0005 6.08487 19.0403 9.96539C20.2886 14.6241 17.3494 19.3835 12.5882 20.6593C7.82702 21.935 2.90191 19.2829 1.6536 14.6241C1.08197 12.4908 1.39208 10.3247 2.35445 8.48945C2.61093 8.00033 3.21536 7.81174 3.70448 8.06822C4.19359 8.3247 4.38218 8.92912 4.1257 9.41824C3.38239 10.8358 3.15154 12.4871 3.58545 14.1065C4.52689 17.62 8.29628 19.7387 12.0706 18.7274C15.8448 17.7161 18.0499 13.9965 17.1084 10.483C16.3061 7.48892 13.4502 5.50769 10.2877 5.61321L12.1483 7.7997C12.5062 8.22031 12.4554 8.85143 12.0347 9.20935C11.6141 9.56727 10.983 9.51644 10.6251 9.09583L7.10165 4.9552L9.94289 0.904244C10.26 0.452087 10.8837 0.342627 11.3358 0.659759Z"
-                            fill="#929292"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath id="clip0_47_1312">
-                            <rect
-                              width="19"
-                              height="21"
-                              fill="white"
-                              transform="translate(0.5 0.5)"
-                            />
-                          </clipPath>
-                        </defs>
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M26.8492 14.7071C27.2398 14.3166 27.2398 13.6834 26.8492 13.2929C26.4587 12.9024 25.8255 12.9024 25.435 13.2929L19.571 19.1569L13.7071 13.2929C13.3166 12.9024 12.6834 12.9024 12.2929 13.2929C11.9024 13.6834 11.9024 14.3166 12.2929 14.7071L18.1568 20.5711L12.7071 26.0208C12.3166 26.4113 12.3166 27.0445 12.7071 27.435C13.0976 27.8256 13.7308 27.8256 14.1213 27.435L19.571 21.9853L25.0208 27.4351C25.4113 27.8256 26.0445 27.8256 26.435 27.4351C26.8256 27.0445 26.8256 26.4114 26.435 26.0208L20.9853 20.5711L26.8492 14.7071Z"
+                          fill="#929292"
+                        />
                       </svg>
                     </Clear>
-                    <Undo onClick={this.removeLast}>
+                    <Undo
+                      onClick={this.removeLast}
+                      active={this.state.weights.length > 0}
+                    >
                       <svg
                         width="18"
                         height="15"
