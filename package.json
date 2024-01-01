@@ -9,11 +9,14 @@
     "bottom-sheet-react": "^0.1.27",
     "focus-trap-react": "^10.1.1",
     "react": "^18.2.0",
+    "react-csv-reader": "^4.0.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.1",
     "react-scripts": "5.0.1",
     "react-spring-bottom-sheet": "^3.4.1",
     "react-tabs": "^6.0.0",
     "styled-components": "^5.3.8",
+    "swiper": "^11.0.5",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
