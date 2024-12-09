@@ -141,7 +141,7 @@ class Wrapped extends Component {
 
     //filter down to only exercises done this year
     dataThisYear = dataThisYear.filter(
-      (ex) => ex[0] != null && ex[0].startsWith("2023")
+      (ex) => ex[0] != null && ex[0].startsWith("2024")
     );
 
     //create an array of each date exercised on
